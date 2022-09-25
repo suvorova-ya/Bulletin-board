@@ -1,0 +1,72 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load project_tags %}
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{title}}</title>
+        {% bootstrap_css %}
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        {% bootstrap_javascript jquery='slim' %}
+
+
+         <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+
+</head>
+
+
+    <body class="cont ner-fluid">
+        <header class="mb-4">
+            <h1 class="display-1 text-center">Доска объявлений</h1>
+        </header>
+        <div class="row">
+            <ul class="col nav justify-content-end border">
+                <li class="nav-item"><a class="nav-link"
+
+
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Профиль</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'profile' %}">Личный кабинет</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="row">
+            <nav class="col-md-auto nav flex-column border">
+                <a class="nav-link root" href="{% url 'home' %}">Главная</a>
+    <!-- Sidebar слева -->
+	<td valign="top" class="left-chapters">
+	<ul id="leftchapters">
+{% if cat_selected == 0 %}
+		<li class="selected">Все категории</li>
+{% else %}
+		<li><a href="{% url 'home' %}">Все категории</a></li>
+{% endif %}
+
+{% show_categories cat_selected=cat_selected %}
+
+            </nav>
+            <div class="content-text">
+
+<!--                {% bootstrap_messages %}-->
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <footer class="mt-3">
+            <p class="text-right font-italic">&copy; пользователи.</p>
+        </footer>
+    </body>
+</html>

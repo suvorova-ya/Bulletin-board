@@ -1,0 +1,26 @@
+{% extends "project/main.html" %}
+
+
+{% block title %}
+Профиль пользователя
+{% endblock %}
+
+{% block content %}
+
+<h2>Профиль пользователя {{ user.username }}</h2>
+{% if user.first_name and user.last_name %}
+<p>Здравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+{% else %}
+<p>Здравствуйте!</p>
+{% endif %}
+
+  <br>
+<button> <a href="{% url 'list_post' %}">Мои объявления</a> </button>
+
+    <br>
+ <br>
+
+
+                        <a href="{% url 'post_create' %}"><button type="button" class="btn btn-outline-primary">Разместить объявление</button></a>
+<button> <a href="logout/">Выйти</a> </button>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout/basic.html" %}
+
+
+{% block content %}
+<h2> Активация аккаунта</h2>
+
+<form action="{% url 'profile' %}" method="post">
+    {% csrf_token %}
+    <label for="email">E-Mail</label>
+    <input id="email" type="text" name="email" value="" maxlength=32 required >
+
+    <label for="otp">Код активации</label>
+    <input id="otp" type="text" name="otp" value="" maxlength=6 required >
+
+    <input type="submit" value="Активировать">
+</form>
+
+<p></p>
+{% if request.session.activation_state == '' %}<p>Код активации аккаунта отправлен на ваш почтовый адрес,
+    введите адрес и код в форму выше</p>{% endif %}
+{% if request.session.activation_state == 'reenter_code' %} <p style="color:red;">Неверный код подтверждения</p>{% endif %}
+{% if request.session.activation_state == 'reenter_email' %} <p style="color:red;">Неверный почтовый адрес</p>{% endif %}
+{% if request.session.activation_state == 'reregister' %} <p style="color:red;">Время действия кода подтверждения истекло</p>
+<a href="account/signup/otp_code/"> Необходимо выполнить регистрацию заново здесь </a>
+{% endif %}
+{% if request.session.activation_state == 'success' %} <p style="color:blue;">Активация учетной записи прошла успешно!</p>
+<a href="/login/"> Нажмите здесь, чтобы перейти на страницу входа </a>
+{% endif %}
+
+{% endblock %}

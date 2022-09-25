@@ -1,0 +1,28 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="}}" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="djangoD2.account.urls.*" />
+          <option value="djangoD2.news_portal.views.DataMixin" />
+          <option value="djangoD2.djangoD2.settings.EMAIL_HOST_USER" />
+          <option value="djangoD2.internet_shop.apps.internet_shop" />
+          <option value="djangoD2.news_portal.templatetags.profanity_filters.*" />
+          <option value="djangoD2.news_portal.templatetags.news_portal_tags.models" />
+          <option value="djangoD2.news_portal.management.commands.runapscheduler.send_message" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

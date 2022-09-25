@@ -1,0 +1,15 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+      <h3>{{ post.title }}</h3>
+
+<form method="POST"  enctype="multipart/form-data">
+     {% csrf_token %}<br>
+
+{{ form.as_p }}
+    <input type="submit" value="Add post">
+{% endblock content %}
+

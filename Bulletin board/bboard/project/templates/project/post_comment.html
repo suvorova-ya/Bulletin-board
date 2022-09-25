@@ -1,0 +1,30 @@
+{% extends "layout/basic.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% if post %}
+        <h1>{{ post.title }}</h1>
+            {% if post.image %}
+	<p><img class="img-article-left thumb" src="{{post.image.url}}"></p>
+{% endif %}
+        <p>
+        <h3>{{ post.body|safe }}</h3>
+        <p>
+        <hr>
+        {% for r in comment %}
+        <h1>Автор: {{r.author}}</h1>
+        <p>
+            <h3>Комментарий: {{r.body}}</h3>
+                         <a href="{% url 'comment_delete' r.id %}"><button type="button" class="btn btn-outline-success">delete comment</button></a>
+            {%if r.active == False %}
+                <a href="{% url 'accept' post.id %}"><button type="button" class="btn btn-outline-success">accept comment</button></a><br>
+            {% else %}
+                <a href="{% url 'accept' post.id %}"><button class="btn btn-outline-success" style="pointer-events: none;" type="button" disabled>accepted</button></a><br>
+            {% endif %}
+            <hr>
+                {% empty %}
+    No comment yet
+        {% endfor %}
+    {% endif %}
+{% endblock content %}

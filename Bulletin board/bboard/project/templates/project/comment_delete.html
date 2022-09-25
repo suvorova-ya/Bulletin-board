@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+
+{% load static %}
+
+{% block content %}
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Комментарий будет удален. Вы уверены?
+    <p>{{ object.body }}</p>
+    {{ form }}
+    <input type="submit" value="Delete" />
+</form>
+{% endblock content %}

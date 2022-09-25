@@ -1,0 +1,46 @@
+{% extends "layout/basic.html" %}
+
+{% load static %}
+
+<head>{% block title %} Board {% endblock title %}</head>
+
+{% block content %}
+
+{% if board %}
+    {% for n in board %}
+        {% if n.author == request.user %}
+            <h1><a href="/accounts/profile/post/{{n.id}}/">{{n.title}}</a>
+           {% if n.image %}
+     <p><img class="img-article-left" src="{{n.image.url}}"></p>
+            {% endif %}
+            <h2>{{n.body|safe}}
+            <p>
+            <h4>{{n.author}} <br> {{n.category}}
+            <h4>{{n.created|date:'M d H:i'}}
+            <p>
+             <a href="{% url 'post_create' n.id %}"><button type="button" class="btn btn-outline-success">update post</button></a><br>
+             <a href="{% url 'post_delete' n.id %}"><button type="button" class="btn btn-outline-success">delete post</button></a><br>
+            <hr>
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+                <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock content %}
